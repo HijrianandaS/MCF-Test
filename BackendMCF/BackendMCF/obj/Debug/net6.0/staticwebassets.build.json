@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "IPguX8SBqtcibpm2dDhELnblsh23CHxaJzaPqN2a3nE=",
+  "Source": "BackendMCF",
+  "BasePath": "_content/BackendMCF",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

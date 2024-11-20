@@ -1,0 +1,426 @@
+﻿@{
+    ViewData["Title"] = "Land Valuation Report";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Hasil Report</h1>
+
+<!-- Modal Tambah -->
+<div class="modal fade" id="addBpkbModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Tambah Data Baru</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addBpkbForm">
+                    <div class="mb-3">
+                        <label for="agreementNumber" class="form-label">Agreement Number</label>
+                        <input type="text" class="form-control" id="agreementNumber" name="agreementNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bpkbNo" class="form-label">BPKB Number</label>
+                        <input type="text" class="form-control" id="bpkbNo" name="bpkbNo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="branchId" class="form-label">Branch ID</label>
+                        <input type="text" class="form-control" id="branchId" name="branchId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bpkbDate" class="form-label">BPKB Date</label>
+                        <input type="datetime-local" class="form-control" id="bpkbDate" name="bpkbDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fakturNo" class="form-label">Faktur Number</label>
+                        <input type="text" class="form-control" id="fakturNo" name="fakturNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="fakturDate" class="form-label">Faktur Date</label>
+                        <input type="datetime-local" class="form-control" id="fakturDate" name="fakturDate">
+                    </div>
+                    @*<div class="mb-3">
+                        <label for="locationId" class="form-label">Location ID</label>
+                        <input type="text" class="form-control" id="locationId" name="locationId" required>
+                    </div>*@
+                    <div class="mb-3">
+                        <label for="locationId" class="form-label">Location Name</label>
+                        <select class="form-control" id="locationId" name="locationId" required>
+                            <option value="" disabled selected>Select Location</option>
+                            <!-- Options akan diisi melalui JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="policeNo" class="form-label">Police Number</label>
+                        <input type="text" class="form-control" id="policeNo" name="policeNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bpkbDateIn" class="form-label">BPKB Date In</label>
+                        <input type="datetime-local" class="form-control" id="bpkbDateIn" name="bpkbDateIn">
+                    </div>
+                    <div class="mb-3">
+                        <label for="createdBy" class="form-label">Created By</label>
+                        <input type="text" class="form-control" id="createdBy" name="createdBy" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastUpdatedBy" class="form-label">Last Updated By</label>
+                        <input type="text" class="form-control" id="lastUpdatedBy" name="lastUpdatedBy" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="saveNewBpkb">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update --!>
+<div class="modal fade" id="updateBpkbModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateBpkbForm">
+                    <div class="mb-3">
+                        <label for="updateAgreementNumber" class="form-label">Agreement Number</label>
+                        <input type="text" class="form-control" id="updateAgreementNumber" name="agreementNumber" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateBpkbNo" class="form-label">BPKB Number</label>
+                        <input type="text" class="form-control" id="updateBpkbNo" name="bpkbNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateBranchId" class="form-label">Branch ID</label>
+                        <input type="text" class="form-control" id="updateBranchId" name="branchId">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateBpkbDate" class="form-label">BPKB Date</label>
+                        <input type="datetime-local" class="form-control" id="updateBpkbDate" name="bpkbDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateFakturNo" class="form-label">Faktur Number</label>
+                        <input type="text" class="form-control" id="updateFakturNo" name="fakturNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateFakturDate" class="form-label">Faktur Date</label>
+                        <input type="datetime-local" class="form-control" id="updateFakturDate" name="fakturDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateLocationId" class="form-label">Location Name</label>
+                        <select class="form-control" id="updateLocationId" name="locationId">
+                            <option value="" disabled selected>Select Location</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="updatePoliceNo" class="form-label">Police Number</label>
+                        <input type="text" class="form-control" id="updatePoliceNo" name="policeNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateBpkbDateIn" class="form-label">BPKB Date In</label>
+                        <input type="datetime-local" class="form-control" id="updateBpkbDateIn" name="bpkbDateIn">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateLastUpdatedBy" class="form-label">Last Updated By</label>
+                        <input type="text" class="form-control" id="updateLastUpdatedBy" name="lastUpdatedBy">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="updateBpkbBtn">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addBpkbModal">
+    Add Data
+</button>
+
+<table id="bpkbTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Agreement Number</th>
+            <th>BPKB Number</th>
+            <th>Branch ID</th>
+            <th>BPKB Date</th>
+            <th>Faktur No</th>
+            <th>Faktur Date</th>
+            <th>Location Name</th>
+            <th>Police No</th>
+            <th>Created By</th>
+            <th>Created On</th>
+            <th>Last Updated By</th>
+            <th>Last Updated On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Data akan diisi melalui AJAX -->
+    </tbody>
+</table>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#bpkbTable').DataTable({
+            "ajax": {
+                "url": "https://localhost:7094/api/Bpkb/GetAll",
+                "dataSrc": "data" // Data berada di properti `data`
+            },
+            "columns": [
+                {
+                    "data": null, // Kolom nomor urut
+                    "render": function (data, type, row, meta) {
+                        return meta.row + 1; // Nomor urut (1-based index)
+                    }
+                },
+                { "data": "agreementNumber" },
+                { "data": "bpkbNo" },
+                { "data": "branchId" },
+                {
+                    "data": "bpkbDate",
+                    "render": function (data) {
+                        const date = new Date(data);
+                        return date.toLocaleDateString(); // Format tanggal
+                    }
+                },
+                { "data": "fakturNo" },
+                {
+                    "data": "fakturDate",
+                    "render": function (data) {
+                        const date = new Date(data);
+                        return date.toLocaleDateString(); // Format tanggal
+                    }
+                },
+                { "data": "locationId" },
+                { "data": "policeNo" },
+                { "data": "createdBy" },
+                {
+                    "data": "createdOn",
+                    "render": function (data) {
+                        const date = new Date(data);
+                        return date.toLocaleString(); // Format tanggal dan waktu
+                    }
+                },
+                { "data": "lastUpdatedBy" },
+                {
+                    "data": "lastUpdatedOn",
+                    "render": function (data) {
+                        const date = new Date(data);
+                        return date.toLocaleString(); // Format tanggal dan waktu
+                    }
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return `
+                                <button class="btn btn-warning btn-sm update-data" data-id="string2121" data-bs-toggle="modal" data-bs-target="#addBpkbModal">Update</button>
+                                <button class="btn btn-danger btn-sm delete-data" data-id="${row.agreementNumber}">Delete</button>
+                        `;
+                    }
+                }
+            ],
+            "pageLength": 10,
+            "paging": true,
+            "searching": true,
+            "info": true,
+            "lengthChange": true
+        });
+
+        // Tambah
+        $('#saveNewBpkb').click(function () {
+            const bpkbData = {
+                agreementNumber: $('#agreementNumber').val(),
+                bpkbNo: $('#bpkbNo').val(),
+                branchId: $('#branchId').val(),
+                bpkbDate: $('#bpkbDate').val(),
+                fakturNo: $('#fakturNo').val(),
+                fakturDate: $('#fakturDate').val(),
+                locationId: $('#locationId').val(),
+                policeNo: $('#policeNo').val(),
+                bpkbDateIn: $('#bpkbDateIn').val(),
+                createdBy: $('#createdBy').val(),
+                createdOn: new Date().toISOString(), // Generate waktu saat ini
+                lastUpdatedBy: $('#lastUpdatedBy').val(),
+                lastUpdatedOn: new Date().toISOString() // Generate waktu saat ini
+            };
+
+            $.ajax({
+                url: "https://localhost:7094/api/Bpkb/Add",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(bpkbData),
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data berhasil ditambahkan.',
+                    }).then(() => {
+                        $('#addBpkbForm').trigger("reset");
+                        $('#addBpkbModal').modal('hide');
+                        $('#bpkbTable').DataTable().ajax.reload(); // Reload DataTable
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat menyimpan data.',
+                    });
+                }
+            });
+        });
+
+        // Hapus Data
+        $('#bpkbTable').on('click', '.delete-data', function () {
+            const id = $(this).data('id');
+            Swal.fire({
+                title: 'Yakin ingin menghapus data ini?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `https://localhost:7094/api/Bpkb/Delete/${id}`,
+                        type: "DELETE",
+                        success: function () {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: 'Data berhasil dihapus.',
+                            }).then(() => {
+                                $('#bpkbTable').DataTable().ajax.reload();
+                            });
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal!',
+                                text: 'Terjadi kesalahan saat menghapus data.',
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        function fetchLocations() {
+            $.ajax({
+                url: "https://localhost:7094/api/Storage/GetAll",
+                type: "GET",
+                success: function (response) {
+                    const locations = response.data; // Ambil data lokasi
+                    const locationSelect = $('#locationId');
+
+                    // Kosongkan dropdown
+                    locationSelect.empty();
+                    locationSelect.append('<option value="" disabled selected>Select Location</option>');
+
+                    // Tambahkan opsi lokasi ke dropdown
+                    locations.forEach(location => {
+                        locationSelect.append(`<option value="${location.locationId}">${location.locationName}</option>`);
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Tidak dapat mengambil data lokasi.',
+                    });
+                }
+            });
+        }
+
+        $('#bpkbTable').on('click', '.update-data', function () {
+            const agreementNumber = $(this).data('id'); // Ambil agreementNumber dari tombol
+            $.ajax({
+                url: `https://localhost:7094/api/Bpkb/GetById/${agreementNumber}`,
+                type: "GET",
+                success: function (data) {
+                    // Isi data ke dalam modal update
+                    $('#updateAgreementNumber').val(data.agreementNumber);
+                    $('#updateBpkbNo').val(data.bpkbNo);
+                    $('#updateBranchId').val(data.branchId);
+                    $('#updateBpkbDate').val(new Date(data.bpkbDate).toISOString().slice(0, 16));
+                    $('#updateFakturNo').val(data.fakturNo);
+                    $('#updateFakturDate').val(new Date(data.fakturDate).toISOString().slice(0, 16));
+                    $('#updateLocationId').val(data.locationId);
+                    $('#updatePoliceNo').val(data.policeNo);
+                    $('#updateBpkbDateIn').val(new Date(data.bpkbDateIn).toISOString().slice(0, 16));
+                    $('#updateLastUpdatedBy').val(data.lastUpdatedBy);
+
+                    // Tampilkan modal update
+                    $('#updateBpkbModal').modal('show');
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Data tidak dapat diambil.',
+                    });
+                }
+            });
+        });
+        
+        $('#updateBpkbBtn').click(function () {
+            const agreementNumber = $('#updateAgreementNumber').val(); // Ambil agreementNumber dari modal
+
+            const bpkbData = {
+                agreementNumber: agreementNumber,
+                bpkbNo: $('#updateBpkbNo').val(),
+                branchId: $('#updateBranchId').val(),
+                bpkbDate: $('#updateBpkbDate').val(),
+                fakturNo: $('#updateFakturNo').val(),
+                fakturDate: $('#updateFakturDate').val(),
+                locationId: $('#updateLocationId').val(),
+                policeNo: $('#updatePoliceNo').val(),
+                bpkbDateIn: $('#updateBpkbDateIn').val(),
+                lastUpdatedBy: $('#updateLastUpdatedBy').val(),
+                lastUpdatedOn: new Date().toISOString()
+            };
+
+            $.ajax({
+                url: `https://localhost:7094/api/Bpkb/Update/${agreementNumber}`,
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(bpkbData),
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data berhasil diperbarui.',
+                    }).then(() => {
+                        $('#updateBpkbModal').modal('hide');
+                        $('#bpkbTable').DataTable().ajax.reload(); // Reload DataTable
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Data tidak dapat diperbarui.',
+                    });
+                }
+            });
+        });
+
+
+        // Panggil fetchLocations saat modal dibuka
+        $('#addBpkbModal').on('show.bs.modal', function () {
+            fetchLocations();
+        });
+
+        // Reset form modal saat ditutup
+        $('#addBpkbModal').on('hidden.bs.modal', function () {
+            $('#addBpkbForm').trigger("reset");
+            $(this).removeData('id');
+        });
+    });
+</script>
