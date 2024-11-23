@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Land Valuation Report";
+    ViewData["Title"] = "BPKB";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Hasil Report</h1>
+<h2>Hasil Report</h2>
 
 <!-- Modal Tambah -->
 <div class="modal fade" id="addBpkbModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -15,66 +15,78 @@
             </div>
             <div class="modal-body">
                 <form id="addBpkbForm">
-                    <div class="mb-3">
-                        <label for="agreementNumber" class="form-label">Agreement Number</label>
-                        <input type="text" class="form-control" id="agreementNumber" name="agreementNumber" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="bpkbNo" class="form-label">BPKB Number</label>
-                        <input type="text" class="form-control" id="bpkbNo" name="bpkbNo" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="branchId" class="form-label">Branch ID</label>
-                        <input type="text" class="form-control" id="branchId" name="branchId" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="bpkbDate" class="form-label">BPKB Date</label>
-                        <input type="datetime-local" class="form-control" id="bpkbDate" name="bpkbDate" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="fakturNo" class="form-label">Faktur Number</label>
-                        <input type="text" class="form-control" id="fakturNo" name="fakturNo">
-                    </div>
-                    <div class="mb-3">
-                        <label for="fakturDate" class="form-label">Faktur Date</label>
-                        <input type="datetime-local" class="form-control" id="fakturDate" name="fakturDate">
-                    </div>
-                    @*<div class="mb-3">
-                        <label for="locationId" class="form-label">Location ID</label>
-                        <input type="text" class="form-control" id="locationId" name="locationId" required>
-                    </div>*@
-                    <div class="mb-3">
-                        <label for="locationId" class="form-label">Location Name</label>
-                        <select class="form-control" id="locationId" name="locationId" required>
-                            <option value="" disabled selected>Select Location</option>
-                            <!-- Options akan diisi melalui JavaScript -->
-                        </select>
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="agreementNumber" class="form-label">Agreement Number</label>
+                            <input type="text" class="form-control" id="agreementNumber" name="agreementNumber" required>
+                        </div>
+                        
+                        <!-- Kolom Kiri -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="bpkbNo" class="form-label">BPKB Number</label>
+                                <input type="text" class="form-control" id="bpkbNo" name="bpkbNo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="branchId" class="form-label">Branch ID</label>
+                                <input type="text" class="form-control" id="branchId" name="branchId" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bpkbDate" class="form-label">BPKB Date</label>
+                                <input type="date" class="form-control" id="bpkbDate" name="bpkbDate" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="bpkbDateIn" class="form-label">BPKB Date In</label>
+                                <input type="date" class="form-control" id="bpkbDateIn" name="bpkbDateIn" required>
+                            </div>
+                            @*<div class="mb-3">
+                                <label for="createdBy" class="form-label">Created By</label>
+                                <input type="text" class="form-control" id="createdBy" name="createdBy" readonly>
+                            </div>*@
+                            <input type="hidden" id="createdBy" name="createdBy">
+                        </div>
+
+                        <!-- Kolom Kanan -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="fakturNo" class="form-label">Faktur Number</label>
+                                <input type="text" class="form-control" id="fakturNo" name="fakturNo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="policeNo" class="form-label">Police Number</label>
+                                <input type="text" class="form-control" id="policeNo" name="policeNo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fakturDate" class="form-label">Faktur Date</label>
+                                <input type="date" class="form-control" id="fakturDate" name="fakturDate" required>
+                            </div>
+                            @*<div class="mb-3">
+                                <label for="lastUpdatedBy" class="form-label">Last Updated By</label>
+                                <input type="text" class="form-control" id="lastUpdatedBy" name="lastUpdatedBy" readonly>
+                            </div>*@
+                            <input type="hidden" id="lastUpdatedBy" name="lastUpdatedBy">
+                            <div class="mb-3">
+                                <label for="locationId" class="form-label">Location Name</label>
+                                <select class="form-control" id="locationId" name="locationId" required>
+                                    <option value="" disabled selected>Select Location</option>
+                                    <!-- Options akan diisi melalui JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                      
                     </div>
 
-                    <div class="mb-3">
-                        <label for="policeNo" class="form-label">Police Number</label>
-                        <input type="text" class="form-control" id="policeNo" name="policeNo">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary" id="saveNewBpkb">Save</button>
                     </div>
-                    <div class="mb-3">
-                        <label for="bpkbDateIn" class="form-label">BPKB Date In</label>
-                        <input type="datetime-local" class="form-control" id="bpkbDateIn" name="bpkbDateIn">
-                    </div>
-                    <div class="mb-3">
-                        <label for="createdBy" class="form-label">Created By</label>
-                        <input type="text" class="form-control" id="createdBy" name="createdBy" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="lastUpdatedBy" class="form-label">Last Updated By</label>
-                        <input type="text" class="form-control" id="lastUpdatedBy" name="lastUpdatedBy" required>
-                    </div>
-                    <button type="button" class="btn btn-primary" id="saveNewBpkb">Save</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Update --!>
+<!-- Modal Update -->
 <div class="modal fade" id="updateBpkbModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -84,49 +96,58 @@
             </div>
             <div class="modal-body">
                 <form id="updateBpkbForm">
-                    <div class="mb-3">
-                        <label for="updateAgreementNumber" class="form-label">Agreement Number</label>
-                        <input type="text" class="form-control" id="updateAgreementNumber" name="agreementNumber" readonly>
+                    <div class="row">
+                        <div class="mb-3">
+                             <label for="updateAgreementNumber" class="form-label">Agreement Number</label>
+                             <input type="text" class="form-control" id="updateAgreementNumber" name="agreementNumber" readonly>
+                        </div>
+                        <!-- Kolom Kiri -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="updateBpkbNo" class="form-label">BPKB Number</label>
+                                <input type="text" class="form-control" id="updateBpkbNo" name="bpkbNo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateBranchId" class="form-label">Branch ID</label>
+                                <input type="text" class="form-control" id="updateBranchId" name="branchId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateBpkbDate" class="form-label">BPKB Date</label>
+                                <input type="date" class="form-control" id="updateBpkbDate" name="bpkbDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateBpkbDateIn" class="form-label">BPKB Date In</label>
+                                <input type="date" class="form-control" id="updateBpkbDateIn" name="bpkbDateIn">
+                            </div>
+                            <input type="hidden" id="updatecreatedBy" name="createdBy">
+                        </div>
+                        <!-- Kolom Kanan -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="updateFakturNo" class="form-label">Faktur Number</label>
+                                <input type="text" class="form-control" id="updateFakturNo" name="fakturNo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updatePoliceNo" class="form-label">Police Number</label>
+                                <input type="text" class="form-control" id="updatePoliceNo" name="policeNo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateFakturDate" class="form-label">Faktur Date</label>
+                                <input type="date" class="form-control" id="updateFakturDate" name="fakturDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateLocationId" class="form-label">Location Name</label>
+                                <select class="form-control" id="updateLocationId" name="locationId">
+                                    <option value="" disabled selected>Select Location</option>
+                                    <!-- Options akan diisi melalui JavaScript -->
+                                </select>
+                            </div>
+                            <input type="hidden" id="updateLastUpdatedBy" name="lastUpdatedBy">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="updateBpkbNo" class="form-label">BPKB Number</label>
-                        <input type="text" class="form-control" id="updateBpkbNo" name="bpkbNo">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary" id="updateBpkbBtn">Update</button>
                     </div>
-                    <div class="mb-3">
-                        <label for="updateBranchId" class="form-label">Branch ID</label>
-                        <input type="text" class="form-control" id="updateBranchId" name="branchId">
-                    </div>
-                    <div class="mb-3">
-                        <label for="updateBpkbDate" class="form-label">BPKB Date</label>
-                        <input type="datetime-local" class="form-control" id="updateBpkbDate" name="bpkbDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="updateFakturNo" class="form-label">Faktur Number</label>
-                        <input type="text" class="form-control" id="updateFakturNo" name="fakturNo">
-                    </div>
-                    <div class="mb-3">
-                        <label for="updateFakturDate" class="form-label">Faktur Date</label>
-                        <input type="datetime-local" class="form-control" id="updateFakturDate" name="fakturDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="updateLocationId" class="form-label">Location Name</label>
-                        <select class="form-control" id="updateLocationId" name="locationId">
-                            <option value="" disabled selected>Select Location</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="updatePoliceNo" class="form-label">Police Number</label>
-                        <input type="text" class="form-control" id="updatePoliceNo" name="policeNo">
-                    </div>
-                    <div class="mb-3">
-                        <label for="updateBpkbDateIn" class="form-label">BPKB Date In</label>
-                        <input type="datetime-local" class="form-control" id="updateBpkbDateIn" name="bpkbDateIn">
-                    </div>
-                    <div class="mb-3">
-                        <label for="updateLastUpdatedBy" class="form-label">Last Updated By</label>
-                        <input type="text" class="form-control" id="updateLastUpdatedBy" name="lastUpdatedBy">
-                    </div>
-                    <button type="button" class="btn btn-primary" id="updateBpkbBtn">Update</button>
                 </form>
             </div>
         </div>
@@ -165,6 +186,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script>
     $(document).ready(function () {
+        fetchLocations(); // Panggil fetchLocations untuk mengisi mapping
+        setTimeout(() => {
+            $('#bpkbTable').DataTable(); // Inisialisasi DataTable setelah mapping selesai
+        }, 500); // Berikan jeda untuk memastikan mapping sudah siap
         $('#bpkbTable').DataTable({
             "ajax": {
                 "url": "https://localhost:7094/api/Bpkb/GetAll",
@@ -195,7 +220,14 @@
                         return date.toLocaleDateString(); // Format tanggal
                     }
                 },
-                { "data": "locationId" },
+                {
+            "data": "locationId",
+            "render": function (data) {
+                // Gunakan mapping untuk mengganti locationId dengan locationName
+                return locationMapping[data] || data; // Jika mapping tidak ditemukan, tampilkan locationId
+            }
+        },
+                //{ "data": "locationId" },
                 { "data": "policeNo" },
                 { "data": "createdBy" },
                 {
@@ -217,7 +249,7 @@
                     "data": null,
                     "render": function (data, type, row) {
                         return `
-                                <button class="btn btn-warning btn-sm update-data" data-id="string2121" data-bs-toggle="modal" data-bs-target="#addBpkbModal">Update</button>
+                                <button class="btn btn-warning btn-sm update-data" data-id="${row.agreementNumber}" data-bs-toggle="modal" data-bs-target="#updateBpkbModal">Update</button>
                                 <button class="btn btn-danger btn-sm delete-data" data-id="${row.agreementNumber}">Delete</button>
                         `;
                     }
@@ -228,6 +260,13 @@
             "searching": true,
             "info": true,
             "lengthChange": true
+        });
+
+        const currentUser = sessionStorage.getItem('User'); // Ambil data User dari session storage
+
+        $('#addBpkbModal').on('show.bs.modal', function () {
+            $('#createdBy').val(currentUser); // Isi Created By
+            $('#lastUpdatedBy').val(currentUser); // Isi Last Updated By
         });
 
         // Tambah
@@ -311,6 +350,8 @@
             });
         });
 
+        let locationMapping = {}; // Variabel global untuk mapping locationId ke locationName
+
         function fetchLocations() {
             $.ajax({
                 url: "https://localhost:7094/api/Storage/GetAll",
@@ -323,9 +364,10 @@
                     locationSelect.empty();
                     locationSelect.append('<option value="" disabled selected>Select Location</option>');
 
-                    // Tambahkan opsi lokasi ke dropdown
+                    // Tambahkan opsi lokasi ke dropdown dan simpan mapping
                     locations.forEach(location => {
                         locationSelect.append(`<option value="${location.locationId}">${location.locationName}</option>`);
+                        locationMapping[location.locationId] = location.locationName; // Simpan mapping
                     });
                 },
                 error: function () {
@@ -338,23 +380,39 @@
             });
         }
 
+        // Update
         $('#bpkbTable').on('click', '.update-data', function () {
-            const agreementNumber = $(this).data('id'); // Ambil agreementNumber dari tombol
+            const agreementNumber = $(this).data('id'); // Ambil ID
             $.ajax({
                 url: `https://localhost:7094/api/Bpkb/GetById/${agreementNumber}`,
                 type: "GET",
-                success: function (data) {
-                    // Isi data ke dalam modal update
+                success: function (response) {
+                    const data = response.data; // Pastikan mengambil properti 'data'
+
+                    console.log("Data Update :", data);
+
                     $('#updateAgreementNumber').val(data.agreementNumber);
                     $('#updateBpkbNo').val(data.bpkbNo);
                     $('#updateBranchId').val(data.branchId);
-                    $('#updateBpkbDate').val(new Date(data.bpkbDate).toISOString().slice(0, 16));
+
+                    const bpkbDate = data.bpkbDate ? new Date(data.bpkbDate).toISOString().split('T')[0] : '';
+                    $('#updateBpkbDate').val(bpkbDate);
+
                     $('#updateFakturNo').val(data.fakturNo);
-                    $('#updateFakturDate').val(new Date(data.fakturDate).toISOString().slice(0, 16));
-                    $('#updateLocationId').val(data.locationId);
+
+                    const fakturDate = data.fakturDate ? new Date(data.fakturDate).toISOString().split('T')[0] : '';
+                    $('#updateFakturDate').val(fakturDate);
+
                     $('#updatePoliceNo').val(data.policeNo);
-                    $('#updateBpkbDateIn').val(new Date(data.bpkbDateIn).toISOString().slice(0, 16));
-                    $('#updateLastUpdatedBy').val(data.lastUpdatedBy);
+
+                    const bpkbDateIn = data.bpkbDateIn ? new Date(data.bpkbDateIn).toISOString().split('T')[0] : '';
+                    $('#updateBpkbDateIn').val(bpkbDateIn);
+
+                    $('#updateLastUpdatedBy').val(sessionStorage.getItem('User')); // Ambil user dari session
+                    $('#updatecreatedBy').val(data.createdBy);
+
+                    // Panggil fetchLocations untuk mengisi dropdown
+                    fetchLocationsForUpdate(data.locationId);
 
                     // Tampilkan modal update
                     $('#updateBpkbModal').modal('show');
@@ -368,9 +426,39 @@
                 }
             });
         });
-        
+
+
+        function fetchLocationsForUpdate(selectedLocationId) {
+            $.ajax({
+                url: "https://localhost:7094/api/Storage/GetAll",
+                type: "GET",
+                success: function (response) {
+                    const locations = response.data; // Ambil data lokasi
+                    const locationSelect = $('#updateLocationId');
+
+                    // Kosongkan dropdown
+                    locationSelect.empty();
+                    locationSelect.append('<option value="" disabled>Select Location</option>');
+
+                    // Tambahkan opsi lokasi ke dropdown dan set opsi terpilih
+                    locations.forEach(location => {
+                        const selected = location.locationId === selectedLocationId ? 'selected' : '';
+                        locationSelect.append(`<option value="${location.locationId}" ${selected}>${location.locationName}</option>`);
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Tidak dapat mengambil data lokasi.',
+                    });
+                }
+            });
+        }
+
+
         $('#updateBpkbBtn').click(function () {
-            const agreementNumber = $('#updateAgreementNumber').val(); // Ambil agreementNumber dari modal
+            const agreementNumber = $('#updateAgreementNumber').val();
 
             const bpkbData = {
                 agreementNumber: agreementNumber,
@@ -383,6 +471,7 @@
                 policeNo: $('#updatePoliceNo').val(),
                 bpkbDateIn: $('#updateBpkbDateIn').val(),
                 lastUpdatedBy: $('#updateLastUpdatedBy').val(),
+                createdBy: $('#updatecreatedBy').val(),
                 lastUpdatedOn: new Date().toISOString()
             };
 
@@ -412,7 +501,8 @@
         });
 
 
-        // Panggil fetchLocations saat modal dibuka
+
+        // Panggil fetchLocations saat modal Add dibuka
         $('#addBpkbModal').on('show.bs.modal', function () {
             fetchLocations();
         });

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace formReport.Controllers
+namespace Frontend.Controllers
 {
     public class HomeController : Controller
     {
@@ -17,6 +17,12 @@ namespace formReport.Controllers
             }
 
             return View();
+        }*/
+
+        /*public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Clear all session data
+            return RedirectToAction("Account", "Login");
         }*/
     }
 }

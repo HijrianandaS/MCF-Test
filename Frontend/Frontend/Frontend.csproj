@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <None Include="Pages\Error.cshtml" />
-    <None Include="Pages\Index.cshtml" />
     <None Include="Pages\Privacy.cshtml" />
     <None Include="Pages\Shared\_Layout.cshtml" />
     <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />

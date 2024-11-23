@@ -32,22 +32,24 @@
                 </div>
             </div>
         </div>
-    </div>
+|    </div>
 
     <script>
         $(document).ready(function () {
             $('#loginForm').submit(function (event) {
                 event.preventDefault(); // Mencegah refresh halaman
-
+                debugger;
                 const username = $('#username').val();
                 const password = $('#password').val();
 
                 $.ajax({
                     url: 'https://localhost:7094/api/Login/Login',
                     type: 'POST',
-                    data: { username: username, password: password },
+                    contentType: 'application/json',
+                    data: JSON.stringify({ username: username, password: password }),
                     success: function (response) {
                         if (response.message === 'Login Successful') {
+                            sessionStorage.setItem('User', username); // Simpan username di session storage
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Login Successful',
@@ -55,7 +57,7 @@
                                 timer: 2000,
                                 showConfirmButton: false
                             }).then(() => {
-                                window.location.href = '/Home/Index'; // Redirect ke halaman Home/Index
+                                window.location.href = '/Home/Index';
                             });
                         } else {
                             Swal.fire({
@@ -73,6 +75,42 @@
                         });
                     }
                 });
+
+                //$.ajax({
+                //    url: 'https://localhost:7094/api/Login/Login',
+                //    type: 'POST',
+                //    contentType: 'application/json',
+                //    data: JSON.stringify({ username: username, password: password }),
+                //    success: function (response) {
+                //        console.log('Response:', response); // Debugging untuk melihat respons
+                //        if (response.message === 'Login Successful') {
+                //            Swal.fire({
+                //                icon: 'success',
+                //                title: 'Login Successful',
+                //                text: 'Redirecting...',
+                //                timer: 2000,
+                //                showConfirmButton: false
+                //            }).then(() => {
+                //                window.location.href = '/Home/Index'; // Redirect ke halaman Home/Index
+                //            });
+                //        } else {
+                //            Swal.fire({
+                //                icon: 'error',
+                //                title: 'Login Failed',
+                //                text: 'Invalid username or password.'
+                //            });
+                //        }
+                //    },
+                //    error: function (xhr, status, error) {
+                //        console.error('Error:', xhr.responseText); // Debugging untuk error
+                //        Swal.fire({
+                //            icon: 'error',
+                //            title: 'Error',
+                //            text: 'Something went wrong. Please try again later.'
+                //        });
+                //    }
+                //});
+
             });
         });
     </script>
