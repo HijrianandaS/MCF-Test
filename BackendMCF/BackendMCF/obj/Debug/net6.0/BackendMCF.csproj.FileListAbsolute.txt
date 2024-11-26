@@ -85,3 +85,5 @@ D:\MCF_Test\BackendMCF\BackendMCF\obj\Debug\net6.0\refint\BackendMCF.dll
 D:\MCF_Test\BackendMCF\BackendMCF\obj\Debug\net6.0\BackendMCF.pdb
 D:\MCF_Test\BackendMCF\BackendMCF\obj\Debug\net6.0\BackendMCF.genruntimeconfig.cache
 D:\MCF_Test\BackendMCF\BackendMCF\obj\Debug\net6.0\ref\BackendMCF.dll
+D:\MCF_Test\BackendMCF\BackendMCF\obj\Debug\net6.0\BackendMCF.Properties.Resources.resources
+D:\MCF_Test\BackendMCF\BackendMCF\obj\Debug\net6.0\BackendMCF.csproj.GenerateResource.cache

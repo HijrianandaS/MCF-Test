@@ -16,8 +16,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Configuration.AddEnvironmentVariables();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//{
+//    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+//                           ?? "Server=CS-HIJRIANANDA;Database=mcf_db;Trusted_Connection=true;MultipleActiveResultSets=true;Encrypt=False;";
+//    options.UseSqlServer(connectionString);
+//});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -46,5 +55,9 @@ app.UseAuthentication(); // Menambahkan middleware autentikasi
 app.UseAuthorization();
 
 app.MapControllers();
+
+//var envVariable = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
+//Console.WriteLine($"Environment Variable Value: {envVariable}");
+
 
 app.Run();
